@@ -95,3 +95,6 @@ Thumbs.db
 # Package files
 *.deb
 *.rpm
+
+# CodeQL and security scanning
+_codeql_detected_source_root
