@@ -9,6 +9,11 @@ from datetime import datetime
 from typing import Tuple, Dict, Optional
 import math
 
+# Physical constants
+SPEED_OF_LIGHT_MPS = 299792458.0  # Speed of light in meters per second
+SPEED_OF_LIGHT_KMPS = 299792.458  # Speed of light in kilometers per second
+METERS_PER_KM = 1000  # Meters in a kilometer
+
 
 class SatelliteTracker:
     """
@@ -110,8 +115,7 @@ def calculate_doppler_shift(frequency: float, range_rate: float) -> float:
     Returns:
         Doppler shift in Hz
     """
-    SPEED_OF_LIGHT = 299792.458  # km/s
-    doppler_shift = -(frequency * range_rate) / SPEED_OF_LIGHT
+    doppler_shift = -(frequency * range_rate) / SPEED_OF_LIGHT_KMPS
     return doppler_shift
 
 
@@ -126,9 +130,9 @@ def calculate_free_space_loss(frequency: float, distance: float) -> float:
     Returns:
         Path loss in dB
     """
-    SPEED_OF_LIGHT = 299792458.0  # m/s
-    wavelength = SPEED_OF_LIGHT / frequency  # wavelength in meters
-    loss_db = 20 * math.log10(4 * math.pi * distance * 1000 / wavelength)
+    wavelength = SPEED_OF_LIGHT_MPS / frequency  # wavelength in meters
+    distance_m = distance * METERS_PER_KM  # convert distance to meters
+    loss_db = 20 * math.log10(4 * math.pi * distance_m / wavelength)
     return loss_db
 
 
