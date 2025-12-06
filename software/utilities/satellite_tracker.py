@@ -126,8 +126,8 @@ def calculate_free_space_loss(frequency: float, distance: float) -> float:
     Returns:
         Path loss in dB
     """
-    SPEED_OF_LIGHT = 299792.458  # km/s
-    wavelength = SPEED_OF_LIGHT / (frequency / 1e3)  # Convert Hz to kHz
+    SPEED_OF_LIGHT = 299792458.0  # m/s
+    wavelength = SPEED_OF_LIGHT / frequency  # wavelength in meters
     loss_db = 20 * math.log10(4 * math.pi * distance * 1000 / wavelength)
     return loss_db
 
@@ -156,7 +156,9 @@ if __name__ == "__main__":
     )
     
     print("Starlink DIY - Satellite Tracking Utilities")
-    print(f"Observer location: {tracker.observer_lat}°N, {tracker.observer_lon}°E")
+    lat_dir = 'N' if tracker.observer_lat >= 0 else 'S'
+    lon_dir = 'E' if tracker.observer_lon >= 0 else 'W'
+    print(f"Observer location: {abs(tracker.observer_lat)}°{lat_dir}, {abs(tracker.observer_lon)}°{lon_dir}")
     print(f"Observer altitude: {tracker.observer_alt}m")
     print("\nTracking system initialized.")
     print("Load TLE data to begin tracking satellites.")
