@@ -1,0 +1,91 @@
+# Starlink DIY Ground Station Configuration
+
+# Station location (required)
+station:
+  name: "My Ground Station"
+  latitude: 45.0      # Degrees north (negative for south)
+  longitude: -93.0    # Degrees east (negative for west)
+  elevation: 300      # Meters above sea level
+  
+# Antenna configuration
+antenna:
+  type: "parabolic"   # Options: parabolic, phased_array, helical
+  diameter: 0.9       # Meters (for parabolic)
+  gain: 35            # dBi
+  frequency_band: "Ku"  # Ku, Ka
+  
+  # Pointing limits (degrees)
+  azimuth_min: 0
+  azimuth_max: 360
+  elevation_min: 10
+  elevation_max: 90
+
+# Hardware interface
+hardware:
+  serial_port: "/dev/ttyUSB0"  # Linux
+  # serial_port: "COM3"        # Windows
+  baud_rate: 115200
+  timeout: 1.0  # seconds
+  
+  # Motor controller settings
+  motor:
+    azimuth_steps_per_degree: 100
+    elevation_steps_per_degree: 100
+    max_speed: 1000  # steps per second
+    acceleration: 500  # steps per second^2
+
+# Tracking configuration
+tracking:
+  update_rate: 5      # Hz (updates per second)
+  min_elevation: 25   # Minimum satellite elevation (degrees)
+  max_satellites: 10  # Maximum satellites to track simultaneously
+  
+  # TLE (Two-Line Element) data source
+  tle_source: "https://celestrak.org/NORAD/elements/gp.php?GROUP=starlink&FORMAT=tle"
+  tle_update_interval: 86400  # seconds (24 hours)
+
+# Signal processing
+signal:
+  center_frequency: 12.5e9  # Hz (12.5 GHz)
+  bandwidth: 250e6          # Hz (250 MHz)
+  
+  # Doppler correction
+  enable_doppler_correction: true
+  doppler_update_rate: 10  # Hz
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  file: "logs/ground_station.log"
+  max_size: 10485760  # bytes (10 MB)
+  backup_count: 5
+  
+  # Telemetry logging
+  telemetry:
+    enabled: true
+    file: "logs/telemetry.csv"
+    interval: 1.0  # seconds
+
+# Web interface (optional)
+web:
+  enabled: false
+  host: "0.0.0.0"
+  port: 8080
+  debug: false
+
+# Safety limits
+safety:
+  # Emergency stop on communication loss
+  watchdog_timeout: 10.0  # seconds
+  
+  # Position limits enforcement
+  enforce_limits: true
+  
+  # Maximum power
+  max_transmit_power: 10  # watts (if transmitting)
+
+# Simulation mode (for testing without hardware)
+simulation:
+  enabled: false
+  simulated_satellites: 5
+  noise_level: 0.1

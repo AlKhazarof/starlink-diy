@@ -1,0 +1,34 @@
+# Starlink DIY - Python Dependencies
+
+# Core dependencies
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Satellite orbit calculations
+# pyorbital>=1.7.0  # Uncomment when implementing satellite tracking
+# skyfield>=1.45    # Alternative orbit calculation library
+
+# Serial communication
+pyserial>=3.5
+
+# Configuration management
+pyyaml>=6.0
+
+# Web interface (optional)
+flask>=2.3.0
+flask-cors>=4.0.0
+
+# Data visualization (optional)
+matplotlib>=3.7.0
+
+# Testing
+pytest>=7.3.0
+pytest-cov>=4.1.0
+
+# Code quality
+pylint>=2.17.0
+black>=23.3.0
+
+# Documentation
+sphinx>=6.2.0
+sphinx-rtd-theme>=1.2.0
