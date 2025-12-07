@@ -37,6 +37,8 @@ To enable GitHub Pages for the first time, a repository administrator needs to:
 2. Under **Source**, select **GitHub Actions**
 3. The workflow will automatically deploy on the next push to `main`
 
+> **Note**: Once this PR is merged to the `main` branch, the website will be automatically deployed to GitHub Pages. The workflow is already configured and ready to run.
+
 ## 📝 Making Changes to the Website
 
 1. **Edit files** in the `website/` directory:
