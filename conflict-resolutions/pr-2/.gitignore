@@ -1,0 +1,100 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv
+venv/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Jupyter
+.ipynb_checkpoints
+
+# Logs
+logs/
+*.log
+
+# Configuration (don't commit with sensitive data)
+config.yaml
+*.private.*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Compiled firmware
+software/firmware/*.bin
+software/firmware/*.hex
+software/firmware/*.elf
+software/firmware/build/
+
+# Build artifacts
+*.o
+*.a
+
+# Documentation builds
+docs/_build/
+docs/_static/
+docs/_templates/
+
+# Hardware design files (large binaries)
+*.gbr
+*.drl
+*.bak
+hardware/**/*.zip
+
+# Data files
+*.csv
+*.dat
+data/
+telemetry/
+
+# TLE data cache
+*.tle
+
+# System files
+Thumbs.db
+.DS_Store
+
+# Package files
+*.deb
+*.rpm
+
+# CodeQL and security scanning
+_codeql_detected_source_root
