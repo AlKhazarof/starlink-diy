@@ -14,6 +14,9 @@ pyserial>=3.5
 # Configuration management
 pyyaml>=6.0
 
+# HTTP client for cloud agent
+requests>=2.31.0
+
 # Web interface (optional)
 flask>=2.3.0
 flask-cors>=4.0.0
