@@ -13,6 +13,13 @@ The Starlink DIY project aims to provide open-source designs, documentation, and
 - **Documentation** covering assembly, configuration, and troubleshooting
 - **Safety guidelines** for legal and ethical operation
 
+## ✨ Features
+
+- **Cloud Agent Delegation**: Offload compute-intensive tasks to remote cloud agents for processing
+- **Satellite tracking and positioning**: Track satellites in real-time
+- **Signal analysis and processing**: Analyze signal strength and quality
+- **Remote diagnostics and monitoring**: Monitor equipment health and performance
+
 ## 📁 Project Structure
 
 ```
@@ -25,77 +32,104 @@ starlink-diy/
 │   ├── antenna/        # Antenna designs and specs
 │   ├── mounting/       # Mounting systems
 │   └── electronics/    # Control electronics
-└── software/           # Software components
-    ├── firmware/       # Embedded firmware
-    ├── ground-station/ # Ground station software
-    └── utilities/      # Utility tools
+├── software/           # Software components
+│   ├── firmware/       # Embedded firmware
+│   ├── ground-station/ # Ground station software
+│   └── utilities/      # Utility tools
+├── src/                # Python source code
+│   └── cloud_agent/    # Cloud agent delegation module
+├── tests/              # Test suite
+└── example_delegation.py  # Example usage
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Basic understanding of RF communications
-- Familiarity with electronics and mechanical assembly
-- Programming knowledge (Python, C/C++)
-- Legal authorization to operate radio equipment in your jurisdiction
+- Python 3.7 or higher
+- Git
+
+### Installation
+
+Clone the repository:
+```bash
+git clone https://github.com/AlKhazarof/starlink-diy.git
+cd starlink-diy
+```
 
 ### Quick Start
 
-1. Read the [Safety and Legal Considerations](docs/safety/LEGAL.md)
-2. Review the [Hardware Documentation](docs/hardware/)
-3. Explore the [Software Documentation](docs/software/)
-4. Join our community and contribute!
+Run the example delegation workflow:
+```bash
+python example_delegation.py
+```
 
-## 🔧 Key Components
+### Cloud Agent Delegation
 
-### Hardware
-- **Antenna Systems**: DIY phased array or parabolic dish designs
-- **Mounting Solutions**: Weatherproof, adjustable mounting systems
-- **Control Electronics**: Satellite tracking and signal processing
+The cloud agent delegation system allows you to delegate tasks to a remote cloud agent:
 
-### Software
-- **Satellite Tracking**: Real-time satellite position calculation
-- **Signal Processing**: Doppler correction and beam steering
-- **Ground Station**: Connection management and monitoring
-- **Utilities**: Configuration, testing, and diagnostic tools
+```python
+from src.cloud_agent import CloudAgentClient, DelegationService, CloudAgentConfig
+from src.cloud_agent.delegation import TaskPriority
 
-## 📖 Documentation
+# Configure and connect
+config = CloudAgentConfig(endpoint="https://your-agent.example.com/api")
+client = CloudAgentClient(config)
+client.connect()
 
-Comprehensive documentation is available in the `docs/` directory:
+# Delegate a task
+service = DelegationService(client)
+task_id = service.delegate_task(
+    task_type="satellite_tracking",
+    task_data={"satellite_id": "starlink-1234"},
+    priority=TaskPriority.HIGH
+)
+```
 
-- [Hardware Design Guide](docs/hardware/)
-- [Software Architecture](docs/software/)
-- [Safety & Legal](docs/safety/)
-- [Contributing Guidelines](CONTRIBUTING.md)
+See [Cloud Agent Delegation Documentation](docs/cloud_agent_delegation.md) for more details.
+
+## 🧪 Testing
+
+Run the test suite:
+```bash
+python -m unittest discover tests
+```
+
+## 📚 Documentation
+
+- [Hardware Documentation](docs/hardware/) - Hardware design and assembly guides
+- [Software Documentation](docs/software/) - Software architecture and development
+- [Cloud Agent Delegation](docs/cloud_agent_delegation.md) - Guide to delegating tasks to cloud agents
+- [Safety Guidelines](docs/safety/) - Legal and safety considerations
 
 ## 🤝 Contributing
 
-We welcome contributions from the community! Whether you're interested in hardware design, software development, documentation, or testing, there's a place for you in this project.
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details on:
 
-Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
+- Code of conduct
+- Development workflow
+- Coding standards
+- How to submit changes
+- Testing requirements
 
-## ⚠️ Important Disclaimers
-
-1. **Legal Compliance**: Always ensure compliance with local laws and regulations regarding radio equipment operation
-2. **Safety First**: Follow all safety guidelines when building and operating equipment
-3. **No Warranties**: This is an experimental project provided as-is
-4. **Ethics**: Use this technology responsibly and ethically
-
-## 📜 License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🌟 Acknowledgments
+## ⚠️ Legal & Safety Notice
 
-This project is inspired by the democratization of satellite internet access and the maker community's spirit of innovation and knowledge sharing.
+**Important**: This project is for educational purposes and enthusiast experimentation. Always:
 
-## 📞 Contact & Community
+- Comply with local regulations regarding radio frequency equipment
+- Obtain necessary licenses and permissions
+- Follow safety guidelines for electrical work and antenna installation
+- Respect satellite operators' terms of service
+- Never interfere with critical communications systems
 
-- Issues: Use GitHub Issues for bug reports and feature requests
-- Discussions: Join our GitHub Discussions for general questions
-- Contributing: See [CONTRIBUTING.md](CONTRIBUTING.md)
+## 🙏 Acknowledgments
+
+This project builds on the collective knowledge of the amateur radio, satellite communication, and open-source hardware communities.
 
 ---
 
-**Note**: This project is for educational and experimental purposes. Always prioritize safety, legality, and ethical considerations in all activities.
+*Remember: Access to communication is a fundamental right. Let's build systems that empower everyone.*
