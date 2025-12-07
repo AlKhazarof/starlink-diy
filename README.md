@@ -8,6 +8,8 @@ This project explores how enthusiasts might build and operate their own links to
 
 Visit our [promotional website](https://alkhazarof.github.io/starlink-diy/) for an overview of the project, or view the website source in the [`website/`](website/) directory.
 
+The website is automatically deployed to GitHub Pages via GitHub Actions. See the [GitHub Pages Setup Guide](docs/github-pages-setup.md) for deployment details.
+
 ## 🎯 Project Vision
 
 The Starlink DIY project aims to provide open-source designs, documentation, and software for building DIY satellite communication equipment. Our goal is to democratize access to satellite internet technology through:
