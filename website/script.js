@@ -209,7 +209,8 @@ const updateYear = () => {
     const yearElements = document.querySelectorAll('.footer-bottom p:first-child');
     const currentYear = new Date().getFullYear();
     yearElements.forEach(element => {
-        element.textContent = element.textContent.replace('2024', currentYear);
+        // Replace any 4-digit year with current year
+        element.textContent = element.textContent.replace(/\b\d{4}\b/, currentYear);
     });
 };
 
@@ -294,7 +295,9 @@ let konamiCode = [];
 const konamiPattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 
 document.addEventListener('keydown', (e) => {
-    konamiCode.push(e.key);
+    // Normalize key to lowercase for letter keys
+    const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    konamiCode.push(key);
     konamiCode = konamiCode.slice(-konamiPattern.length);
     
     if (konamiCode.join(',') === konamiPattern.join(',')) {

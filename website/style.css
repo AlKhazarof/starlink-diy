@@ -507,7 +507,7 @@ body {
 }
 
 .code-block code {
-    font-family: 'Monaco', 'Courier New', monospace;
+    font-family: 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
     font-size: 0.9rem;
     color: var(--primary-color);
     flex: 1;
