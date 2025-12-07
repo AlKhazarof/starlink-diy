@@ -4,6 +4,10 @@
 
 This project explores how enthusiasts might build and operate their own links to satellite internet systems in places where terrestrial connectivity is absent or unreliable, always with safety, legality, and ethics in mind.
 
+## 🌐 Website
+
+Visit our [promotional website](https://alkhazarof.github.io/starlink-diy/) for an overview of the project, or view the website source in the [`website/`](website/) directory.
+
 ## 🎯 Project Vision
 
 The Starlink DIY project aims to provide open-source designs, documentation, and software for building DIY satellite communication equipment. Our goal is to democratize access to satellite internet technology through:
