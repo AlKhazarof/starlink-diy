@@ -351,7 +351,7 @@ class TestDelegationService(unittest.TestCase):
         self.assertEqual(len(self.service.task_queue), 0)
     
     def test_clear_failed_tasks(self):
-        """Test clearing failed tasks."""
+        """Test clearing failed tasks (clear_completed_tasks also removes failed tasks)."""
         self.client._connected = True
         self.client._session = Mock()
         self.client.send_task = Mock(return_value={'task_id': 'id1', 'status': 'submitted'})
@@ -361,6 +361,7 @@ class TestDelegationService(unittest.TestCase):
         # Manually mark task as failed for testing
         self.service.task_queue[0]['status'] = 'failed'
         
+        # clear_completed_tasks removes both completed and failed tasks
         removed = self.service.clear_completed_tasks()
         self.assertEqual(removed, 1)
         self.assertEqual(len(self.service.task_queue), 0)

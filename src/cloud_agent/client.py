@@ -5,8 +5,6 @@ Provides client interface for communicating with cloud agents.
 """
 
 from typing import Dict, Any, Optional
-import json
-import time
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry

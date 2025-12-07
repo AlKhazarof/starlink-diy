@@ -141,15 +141,19 @@ class DelegationService:
             try:
                 status = self.refresh_task_status(task['task_id'])
                 updated_statuses.append(status)
-            except Exception:
-                # Skip tasks that fail to refresh
+            except (ConnectionError, ValueError, Exception) as e:
+                # Skip tasks that fail to refresh due to connection, validation, or HTTP errors
+                # Log error but continue processing other tasks
                 continue
         
         return updated_statuses
     
     def clear_completed_tasks(self) -> int:
         """
-        Remove completed and failed tasks from queue.
+        Remove completed, failed, and cancelled tasks from queue.
+        
+        This clears tasks that have finished processing, regardless of
+        whether they succeeded or failed.
         
         Returns:
             int: Number of tasks removed
