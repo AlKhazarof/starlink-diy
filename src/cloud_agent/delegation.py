@@ -48,9 +48,16 @@ class DelegationService:
             
         Raises:
             ConnectionError: If client not connected
+            ValueError: If task_type is empty or task_data is not a dict
         """
         if not self.client.is_connected():
             raise ConnectionError("Client not connected to cloud agent")
+        
+        # Validate inputs
+        if not task_type or not isinstance(task_type, str):
+            raise ValueError("task_type must be a non-empty string")
+        if not isinstance(task_data, dict):
+            raise ValueError("task_data must be a dictionary")
         
         # Add priority to task data
         enriched_data = {
@@ -62,14 +69,15 @@ class DelegationService:
         response = self.client.send_task(task_type, enriched_data)
         
         # Track task in queue
+        task_id = response.get('task_id')
         self.task_queue.append({
-            'task_id': response.get('task_id'),
+            'task_id': task_id,
             'task_type': task_type,
             'priority': priority,
-            'status': response.get('status')
+            'status': response.get('status', 'unknown')
         })
         
-        return response.get('task_id')
+        return task_id
     
     def get_queue_status(self) -> List[Dict[str, Any]]:
         """
@@ -80,9 +88,68 @@ class DelegationService:
         """
         return self.task_queue.copy()
     
+    def refresh_task_status(self, task_id: str) -> Dict[str, Any]:
+        """
+        Refresh status of a specific task from the cloud agent.
+        
+        Args:
+            task_id: ID of the task to refresh
+            
+        Returns:
+            dict: Updated task status information
+            
+        Raises:
+            ConnectionError: If client not connected
+            ValueError: If task_id not found in queue
+        """
+        if not self.client.is_connected():
+            raise ConnectionError("Client not connected to cloud agent")
+        
+        # Find task in queue
+        task_index = None
+        for i, task in enumerate(self.task_queue):
+            if task['task_id'] == task_id:
+                task_index = i
+                break
+        
+        if task_index is None:
+            raise ValueError(f"Task {task_id} not found in queue")
+        
+        # Get updated status from cloud agent
+        status_response = self.client.get_task_status(task_id)
+        
+        # Update task in queue
+        self.task_queue[task_index]['status'] = status_response.get('status', 'unknown')
+        
+        return status_response
+    
+    def refresh_all_statuses(self) -> List[Dict[str, Any]]:
+        """
+        Refresh status of all tasks in queue from the cloud agent.
+        
+        Returns:
+            list: List of updated task status information
+            
+        Raises:
+            ConnectionError: If client not connected
+        """
+        if not self.client.is_connected():
+            raise ConnectionError("Client not connected to cloud agent")
+        
+        updated_statuses = []
+        for task in self.task_queue:
+            try:
+                status = self.refresh_task_status(task['task_id'])
+                updated_statuses.append(status)
+            except Exception:
+                # Skip tasks that fail to refresh
+                continue
+        
+        return updated_statuses
+    
     def clear_completed_tasks(self) -> int:
         """
-        Remove completed tasks from queue.
+        Remove completed and failed tasks from queue.
         
         Returns:
             int: Number of tasks removed
@@ -90,6 +157,6 @@ class DelegationService:
         initial_count = len(self.task_queue)
         self.task_queue = [
             task for task in self.task_queue 
-            if task['status'] not in ('completed', 'failed')
+            if task['status'] not in ('completed', 'failed', 'cancelled')
         ]
         return initial_count - len(self.task_queue)
