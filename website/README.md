@@ -76,16 +76,18 @@ Edit the `index.html` file to update content. The structure is organized into se
 
 ## 🌟 GitHub Pages Deployment
 
-The website is automatically deployed to GitHub Pages from the `website` directory.
+The website is automatically deployed to GitHub Pages using GitHub Actions. The deployment workflow is triggered on every push to the `main` branch that modifies files in the `website/` directory.
 
-To enable GitHub Pages:
+**Live URL**: `https://alkhazarof.github.io/starlink-diy/`
 
-1. Go to repository Settings → Pages
-2. Source: Deploy from a branch
-3. Branch: Select your branch (e.g., `main`) and `/website` folder
-4. Save
+For detailed information about the deployment process, troubleshooting, and manual deployment, see the [GitHub Pages Setup Guide](../docs/github-pages-setup.md).
 
-The site will be available at: `https://[username].github.io/[repository-name]/`
+### Quick Deployment Info
+
+- **Workflow File**: `.github/workflows/deploy-website.yml`
+- **Trigger**: Push to `main` branch (changes to `website/**`)
+- **Source**: `website/` directory
+- **Deployment Time**: Usually 1-2 minutes after push
 
 ## 📱 Browser Support
 
