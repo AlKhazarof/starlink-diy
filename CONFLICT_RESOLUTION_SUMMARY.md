@@ -65,6 +65,8 @@ conflict-resolutions/pr-2/
 └── apply-resolution.sh    # Helper script for applying resolutions
 ```
 
+**Important Note**: The resolved README.md references files and directories from PR #2 (such as `src/cloud_agent/`, `tests/`, `example_delegation.py`, and `docs/cloud_agent_delegation.md`). These files do not currently exist in main but ARE present in the PR #2 branch. After applying the resolution and completing the merge, all referenced files will be present in the repository.
+
 ## How to Apply
 
 ### Automated (Recommended)

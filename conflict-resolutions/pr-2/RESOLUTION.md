@@ -30,6 +30,8 @@ The resolved versions of the conflicting files are located in this directory:
 - `README.md` - Merged version combining both branches' changes
 - `.gitignore` - Main branch's comprehensive version
 
+**Important Note**: The resolved README.md references files and directories from PR #2 (such as `src/cloud_agent/`, `tests/`, `example_delegation.py`, and `docs/cloud_agent_delegation.md`). These files do not exist in the current main branch but ARE present in PR #2's branch. After applying these resolutions and merging PR #2, all referenced files will be available in the repository. The resolved README.md represents the final state after the merge is complete.
+
 ## How to Apply These Resolutions
 
 ### Option 1: Manual Application (Recommended)
